@@ -1,0 +1,121 @@
+
+/home/zaizhou3/ece411ta/fa22_ece411_.release/mp4/bin/../sim/bin/comp2_rv32imc.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text.swinit1:
+
+80000000 <_start>:
+80000000:	00000317          	auipc	x6,0x0
+80000004:	13030313          	addi	x6,x6,304 # 80000130 <_text_vma_end>
+80000008:	00000397          	auipc	x7,0x0
+8000000c:	12838393          	addi	x7,x7,296 # 80000130 <_text_vma_end>
+80000010:	00730763          	beq	x6,x7,8000001e <_setup>
+
+80000014 <_initbss_loop>:
+80000014:	00032023          	sw	x0,0(x6)
+80000018:	0311                	addi	x6,x6,4
+8000001a:	fe736de3          	bltu	x6,x7,80000014 <_initbss_loop>
+
+8000001e <_setup>:
+8000001e:	40000117          	auipc	x2,0x40000
+80000022:	fe210113          	addi	x2,x2,-30 # c0000000 <_stack_top>
+80000026:	00010433          	add	x8,x2,x0
+8000002a:	00000097          	auipc	x1,0x0
+8000002e:	03e080e7          	jalr	62(x1) # 80000068 <main>
+80000032:	4285                	li	x5,1
+80000034:	00000317          	auipc	x6,0x0
+80000038:	02430313          	addi	x6,x6,36 # 80000058 <tohost>
+8000003c:	00532023          	sw	x5,0(x6)
+80000040:	00032223          	sw	x0,4(x6)
+80000044:	00000097          	auipc	x1,0x0
+80000048:	00c080e7          	jalr	12(x1) # 80000050 <_fini>
+8000004c:	0001                	nop
+8000004e:	0001                	nop
+
+Disassembly of section .text.swfin:
+
+80000050 <_fini>:
+80000050:	00000063          	beqz	x0,80000050 <_fini>
+80000054:	0001                	nop
+80000056:	0001                	nop
+
+Disassembly of section .tohost:
+
+80000058 <tohost>:
+	...
+
+Disassembly of section .fromhost:
+
+80000060 <fromhost>:
+	...
+
+Disassembly of section .text:
+
+80000068 <main>:
+80000068:	d6010113          	addi	x2,x2,-672
+8000006c:	03c00793          	li	x15,60
+80000070:	d0be                	sw	x15,96(x2)
+80000072:	4605                	li	x12,1
+80000074:	03c00593          	li	x11,60
+80000078:	02900313          	li	x6,41
+8000007c:	4831                	li	x16,12
+8000007e:	08f00893          	li	x17,143
+80000082:	a011                	j	80000086 <main+0x1e>
+80000084:	0605                	addi	x12,x12,1
+80000086:	03065533          	divu	x10,x12,x16
+8000008a:	00359693          	slli	x13,x11,0x3
+8000008e:	8e8d                	sub	x13,x13,x11
+80000090:	06f5                	addi	x13,x13,29
+80000092:	030677b3          	remu	x15,x12,x16
+80000096:	00151713          	slli	x14,x10,0x1
+8000009a:	972a                	add	x14,x14,x10
+8000009c:	070a                	slli	x14,x14,0x2
+8000009e:	0266e5b3          	rem	x11,x13,x6
+800000a2:	97ba                	add	x15,x15,x14
+800000a4:	078a                	slli	x15,x15,0x2
+800000a6:	1518                	addi	x14,x2,672
+800000a8:	97ba                	add	x15,x15,x14
+800000aa:	dcb7a023          	sw	x11,-576(x15)
+800000ae:	fd161be3          	bne	x12,x17,80000084 <main+0x1c>
+800000b2:	888a                	mv	x17,x2
+800000b4:	09010813          	addi	x16,x2,144
+800000b8:	2d010313          	addi	x6,x2,720
+800000bc:	fd082683          	lw	x13,-48(x16)
+800000c0:	fd480613          	addi	x12,x16,-44
+800000c4:	a801                	j	800000d4 <main+0x6c>
+800000c6:	0611                	addi	x12,x12,4
+800000c8:	02f69733          	mulh	x14,x13,x15
+800000cc:	02f686b3          	mul	x13,x13,x15
+800000d0:	03060d63          	beq	x12,x16,8000010a <main+0xa2>
+800000d4:	4208                	lw	x10,0(x12)
+800000d6:	00a6e7b3          	or	x15,x13,x10
+800000da:	d7f5                	beqz	x15,800000c6 <main+0x5e>
+800000dc:	04a6c463          	blt	x13,x10,80000124 <main+0xbc>
+800000e0:	87aa                	mv	x15,x10
+800000e2:	8736                	mv	x14,x13
+800000e4:	cb11                	beqz	x14,800000f8 <main+0x90>
+800000e6:	c3b1                	beqz	x15,8000012a <main+0xc2>
+800000e8:	02f76733          	rem	x14,x14,x15
+800000ec:	c711                	beqz	x14,800000f8 <main+0x90>
+800000ee:	02e7e5b3          	rem	x11,x15,x14
+800000f2:	87ba                	mv	x15,x14
+800000f4:	872e                	mv	x14,x11
+800000f6:	ff65                	bnez	x14,800000ee <main+0x86>
+800000f8:	02f547b3          	div	x15,x10,x15
+800000fc:	0611                	addi	x12,x12,4
+800000fe:	02f69733          	mulh	x14,x13,x15
+80000102:	02f686b3          	mul	x13,x13,x15
+80000106:	fd0617e3          	bne	x12,x16,800000d4 <main+0x6c>
+8000010a:	00d8a023          	sw	x13,0(x17)
+8000010e:	00e8a223          	sw	x14,4(x17)
+80000112:	03060813          	addi	x16,x12,48
+80000116:	08a1                	addi	x17,x17,8
+80000118:	fb0312e3          	bne	x6,x16,800000bc <main+0x54>
+8000011c:	4501                	li	x10,0
+8000011e:	2a010113          	addi	x2,x2,672
+80000122:	8082                	ret
+80000124:	87b6                	mv	x15,x13
+80000126:	872a                	mv	x14,x10
+80000128:	bf75                	j	800000e4 <main+0x7c>
+8000012a:	02e547b3          	div	x15,x10,x14
+8000012e:	bf61                	j	800000c6 <main+0x5e>
